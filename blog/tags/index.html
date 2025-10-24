@@ -238,7 +238,7 @@ breadcrumb_parent_name: Blog
 
       {% assign slug = name | slugify: 'latin' %}
       <a href="#{{ slug }}" class="tag-item {{ size_class }}">
-        #{{ name }} <span class="tag-badge">{{ count }}</span>
+        {{ name }} <span class="tag-badge">{{ count }}</span>
       </a>
     {% endfor %}
   </div>
@@ -250,7 +250,7 @@ breadcrumb_parent_name: Blog
   {% assign slug = name | slugify: 'latin' %}
   <section class="tag-section" id="{{ slug }}">
     <div class="tag-section-header">
-      <h2>#{{ name }}</h2>
+      <h2>{{ name }}</h2>
       <span class="tag-count-badge">
         {{ t[1].size }} {% if t[1].size == 1 %}post{% else %}posts{% endif %}
       </span>

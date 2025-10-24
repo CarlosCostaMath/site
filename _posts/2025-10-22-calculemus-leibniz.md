@@ -3,7 +3,7 @@ layout: post
 title: "Calculemus! Como Leibniz Sonhou com a Lógica Moderna Séculos Antes de Ela Existir"
 date: 2025-10-22 10:00:00 -0300
 categories: [História da Ciência]
-tags: [leibniz, lógica, história, filosofia, computação, IA]
+tags: [leibniz, lógica, história, filosofia, computação, IA, Inteligencia]
 description: "Descubra como um filósofo do século XVII antecipou os fundamentos da computação moderna através de uma visão revolucionária sobre o próprio ato de pensar."
 author: Carlos Costa
 reading_time: "12 min de leitura"

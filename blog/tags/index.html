@@ -192,80 +192,90 @@ breadcrumb_parent_name: Blog
 {% include breadcrumb.html %}
 
 <section class="page-header">
-    <h1>🏷️ Tags</h1>
-    <p>Navegue pelos posts através de tags</p>
+  <h1>🏷️ Tags</h1>
+  <p>Navegue pelos posts através de tags</p>
 </section>
 
 <section>
-    <div class="nav-buttons">
-        <a href="{{ '/blog/' | relative_url }}" class="button primary">← Voltar ao Blog</a>
-        <a href="{{ '/blog/arquivo/' | relative_url }}" class="button">Arquivo</a>
-        <a href="{{ '/blog/categorias/' | relative_url }}" class="button">Categorias</a>
-    </div>
+  <div class="nav-buttons">
+    <a href="{{ '/blog/' | relative_url }}" class="button primary">← Voltar ao Blog</a>
+    <a href="{{ '/blog/arquivo/' | relative_url }}" class="button">Arquivo</a>
+    <a href="{{ '/blog/categorias/' | relative_url }}" class="button">Categorias</a>
+  </div>
 </section>
+
+<a id="top"></a>
 
 <!-- Nuvem de Tags -->
 <section>
-    <h2 style="text-align: center; margin-bottom: 1.5rem;">Nuvem de Tags</h2>
-    <div class="tags-cloud">
-        {% assign max_count = 0 %}
-        {% for tag in site.tags %}
-            {% if tag[1].size > max_count %}
-                {% assign max_count = tag[1].size %}
-            {% endif %}
-        {% endfor %}
-        
-        {% for tag in site.tags %}
-            {% assign count = tag[1].size %}
-            {% assign size_class = "tag-size-1" %}
-            {% if count >= max_count %}
-                {% assign size_class = "tag-size-5" %}
-            {% elsif count >= max_count | times: 0.75 %}
-                {% assign size_class = "tag-size-4" %}
-            {% elsif count >= max_count | times: 0.5 %}
-                {% assign size_class = "tag-size-3" %}
-            {% elsif count >= max_count | times: 0.25 %}
-                {% assign size_class = "tag-size-2" %}
-            {% endif %}
-            
-            <a href="#{{ tag[0] | slugify }}" class="tag-item {{ size_class }}">
-                #{{ tag[0] }}
-                <span class="tag-badge">{{ count }}</span>
-            </a>
-        {% endfor %}
-    </div>
+  <h2 style="text-align:center; margin-bottom:1.5rem;">Nuvem de Tags</h2>
+  {% assign tags_sorted = site.tags | sort %}
+  {% assign max_count = 0 %}
+  {% for t in tags_sorted %}
+    {% if t[1].size > max_count %}
+      {% assign max_count = t[1].size %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign q75 = max_count | times: 0.75 %}
+  {% assign q50 = max_count | times: 0.5 %}
+  {% assign q25 = max_count | times: 0.25 %}
+
+  <div class="tags-cloud">
+    {% for t in tags_sorted %}
+      {% assign name = t[0] %}
+      {% assign count = t[1].size %}
+      {% assign size_class = "tag-size-1" %}
+      {% if count >= max_count %}
+        {% assign size_class = "tag-size-5" %}
+      {% elsif count >= q75 %}
+        {% assign size_class = "tag-size-4" %}
+      {% elsif count >= q50 %}
+        {% assign size_class = "tag-size-3" %}
+      {% elsif count >= q25 %}
+        {% assign size_class = "tag-size-2" %}
+      {% endif %}
+
+      {% assign slug = name | slugify: 'latin' %}
+      <a href="#{{ slug }}" class="tag-item {{ size_class }}">
+        #{{ name }} <span class="tag-badge">{{ count }}</span>
+      </a>
+    {% endfor %}
+  </div>
 </section>
 
 <!-- Listagens por Tag -->
-{% for tag in site.tags %}
-<section class="tag-section" id="{{ tag[0] | slugify }}">
+{% for t in tags_sorted %}
+  {% assign name = t[0] %}
+  {% assign slug = name | slugify: 'latin' %}
+  <section class="tag-section" id="{{ slug }}">
     <div class="tag-section-header">
-        <h2>#{{ tag[0] }}</h2>
-        <span class="tag-count-badge">
-            {{ tag[1].size }} {% if tag[1].size == 1 %}post{% else %}posts{% endif %}
-        </span>
+      <h2>#{{ name }}</h2>
+      <span class="tag-count-badge">
+        {{ t[1].size }} {% if t[1].size == 1 %}post{% else %}posts{% endif %}
+      </span>
     </div>
-    
+
     <div class="posts-list-compact">
-        {% for post in tag[1] %}
+      {% for p in t[1] %}
         <div class="post-item-compact">
-            <a href="{{ post.url | relative_url }}" class="post-link">{{ post.title }}</a>
-            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="post-date-badge">{{ post.date | date: "%d/%m/%Y" }}</span>
-                {% if post.categories %}
-                <span class="post-category-badge">{{ post.categories | join: ', ' }}</span>
-                {% endif %}
-            </div>
+          <a href="{{ p.url | relative_url }}" class="post-link">{{ p.title }}</a>
+          <div style="display:flex; align-items:center; flex-wrap:wrap; gap:.5rem;">
+            <span class="post-date-badge">{{ p.date | date: "%d/%m/%Y" }}</span>
+            {% if p.categories %}
+              <span class="post-category-badge">{{ p.categories | join: ', ' }}</span>
+            {% endif %}
+          </div>
         </div>
-        {% endfor %}
+      {% endfor %}
     </div>
-    
-    <div style="text-align: center; margin-top: 1.5rem;">
-        <a href="#" class="button small">↑ Voltar ao Topo</a>
+
+    <div style="text-align:center; margin-top:1.5rem;">
+      <a href="#top" class="button small">↑ Voltar ao Topo</a>
     </div>
-</section>
+  </section>
 {% endfor %}
 
-<section style="margin-top: 3rem; text-align: center;">
-    <a href="{{ '/blog/' | relative_url }}" class="button primary large">← Voltar ao Blog</a>
+<section style="margin-top:3rem; text-align:center;">
+  <a href="{{ '/blog/' | relative_url }}" class="button primary large">← Voltar ao Blog</a>
 </section>

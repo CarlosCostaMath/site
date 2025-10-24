@@ -28,8 +28,10 @@ title: Início
     <div class="posts">
         {% for post in site.posts limit:2 %}
         <article>
-            <a href="{{ post.url | relative_url }}" class="image">
-                <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <a href="{{ post.url | relative_url }}" class="image"
+              style="display:block; height:220px; overflow:hidden; border-radius:.75rem;">
+              <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy"
+              style="width:100%; height:100%; object-fit:cover; display:block;">
             </a>
               <h3 class="post-title">
                 <a href="{{ post.url | relative_url }}">{{ post.title }}</a>

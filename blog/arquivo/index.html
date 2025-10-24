@@ -1,0 +1,512 @@
+---
+layout: default
+title: Arquivo do Blog
+permalink: /blog/arquivo/
+breadcrumb_parent: /blog/
+breadcrumb_parent_name: Blog
+---
+
+<style>
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.page-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.page-header p {
+    margin: 0 0 1.5rem 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.search-box {
+    max-width: 500px;
+    margin: 1.5rem auto 0 auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    background: white;
+    border-color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid #e1e8ed;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+/* Layout baseado no modelo - imagem com destaque (45-48% da largura) */
+.archive-post {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #eee;
+    max-width: 100%;
+}
+
+.archive-post:last-child {
+    border-bottom: none;
+}
+
+.archive-post:hover .post-thumbnail img {
+    transform: scale(1.05);
+}
+
+/* Imagem com destaque - ocupando 45-48% da largura total */
+.post-thumbnail {
+    flex-shrink: 0;
+    width: 45%;
+    height: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.post-thumbnail-link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+/* Conteúdo à direita - ocupando ~52% da largura */
+.post-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 52%;
+}
+
+/* Categoria em maiúsculo com sublinhado laranja */
+.post-category {
+    font-size: 0.7rem;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    border-bottom: 1px solid #ff6b35;
+    padding-bottom: 2px;
+}
+
+.post-category:hover {
+    color: #ff6b35;
+}
+
+/* Título em negrito, serifado, maior - sem sublinhado */
+.post-title {
+    font-family: Georgia, serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #000;
+    text-decoration: none !important;
+    text-underline: none !important;
+    border-bottom: none !important;
+    outline: none;
+    background: none;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.post-title:hover {
+    color: #667eea;
+}
+
+/* Metadados em texto menor */
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+}
+
+.post-author {
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.post-author::after {
+    content: '';
+    width: 1px;
+    height: 12px;
+    background-color: #ff6b35; /* Cor laranja padrão do site */
+    margin-left: 0.5rem;
+}
+
+.post-date {
+    color: #999;
+}
+
+/* Descrição em parágrafo normal */
+.post-description {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.pagination a, .pagination span {
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.pagination .current {
+    background-color: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.pagination .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .archive-post {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .post-thumbnail {
+        width: 100%;
+        height: 160px;
+        align-self: stretch;
+    }
+    
+    .post-content {
+        max-width: 100%;
+    }
+    
+    .post-title {
+        font-size: 1.1rem;
+    }
+    
+    .pagination {
+        gap: 0.3rem;
+    }
+    
+    .pagination a, .pagination span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+</style>
+
+{% include breadcrumb.html %}
+
+<section class="page-header">
+    <h1><i class="fa-solid fa-folder-open"></i> Arquivo do Blog</h1>
+    <p>Todos os posts organizados cronologicamente</p>
+</section>
+
+<section>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar por título ou categoria...">
+    </div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">{{ site.posts.size }}</span>
+            <span class="stat-label">Total de Posts</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ site.categories.size }}</span>
+            <span class="stat-label">Categorias</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ site.tags.size }}</span>
+            <span class="stat-label">Tags</span>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="nav-buttons">
+        <a href="{{ '/blog/' | relative_url }}" class="button primary">← Voltar ao Blog</a>
+        <a href="{{ '/blog/categorias/' | relative_url }}" class="button">Categorias</a>
+        <a href="{{ '/blog/tags/' | relative_url }}" class="button">Tags</a>
+    </div>
+</section>
+
+<section>
+    <div class="pagination-info" id="paginationInfo"></div>
+    <div id="archiveContent">
+        {% assign posts_array = site.posts | sort: 'date' | reverse %}
+        {% assign total_posts = posts_array.size %}
+        {% assign posts_per_page = 10 %}
+        {% assign total_pages = total_posts | divided_by: posts_per_page %}
+        {% if total_posts | modulo: posts_per_page > 0 %}
+            {% assign total_pages = total_pages | plus: 1 %}
+        {% endif %}
+        
+        {% assign current_page = 1 %}
+        {% assign start_index = 0 %}
+        {% assign end_index = posts_per_page | minus: 1 %}
+        
+        {% for post in posts_array limit: posts_per_page %}
+        <div class="archive-post" data-title="{{ post.title | downcase }}" data-category="{% if post.categories %}{{ post.categories | join: ' ' | downcase }}{% endif %}">
+            <div class="post-thumbnail">
+                {% assign img_url = post.hero_image | default: post.image | default: '/images/blog/default-post.jpg' %}
+                <a href="{{ post.url | relative_url }}" class="post-thumbnail-link">
+                    <img src="{{ img_url | relative_url }}" alt="{{ post.title }}">
+                </a>
+            </div>
+            <div class="post-content">
+                {% if post.categories %}
+                <a href="{{ '/blog/categorias/' | relative_url }}#{{ post.categories.first | slugify }}" class="post-category">{{ post.categories | join: ', ' | upcase }}</a>
+                {% endif %}
+                <a href="{{ post.url | relative_url }}" class="post-title">{{ post.title }}</a>
+                <div class="post-meta">
+                    {% if post.author %}
+                    <span class="post-author">{{ post.author | upcase }}</span>
+                    {% endif %}
+                    <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                </div>
+                {% if post.description %}
+                <p class="post-description">{{ post.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="no-results" id="noResults" style="display: none;">
+        <p>Nenhum post encontrado com esse termo de busca.</p>
+    </div>
+    
+    <nav class="pagination" id="pagination">
+        <!-- Paginação será gerada via JavaScript -->
+    </nav>
+</section>
+
+<section style="margin-top: 3rem; text-align: center;">
+    <a href="{{ '/blog/' | relative_url }}" class="button primary large">← Voltar ao Blog</a>
+</section>
+
+<script>
+// Sistema de paginação
+const POSTS_PER_PAGE = 10;
+let currentPage = 1;
+let allPosts = [];
+
+// Coletar todos os posts
+document.addEventListener('DOMContentLoaded', function() {
+    const postElements = document.querySelectorAll('.archive-post');
+    allPosts = Array.from(postElements);
+    
+    // Marcar páginas e gerar paginação
+    updatePagination();
+    updatePaginationInfo();
+});
+
+function updatePagination() {
+    const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+    const paginationNav = document.getElementById('pagination');
+    
+    let paginationHTML = '';
+    
+    // Botão anterior
+    if (currentPage > 1) {
+        paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1})">‹ Anterior</a>`;
+    } else {
+        paginationHTML += `<span class="disabled">‹ Anterior</span>`;
+    }
+    
+    // Números das páginas
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+            paginationHTML += `<span class="current">${i}</span>`;
+        } else {
+            paginationHTML += `<a href="#" onclick="changePage(${i})">${i}</a>`;
+        }
+    }
+    
+    // Botão próximo
+    if (currentPage < totalPages) {
+        paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1})">Próximo ›</a>`;
+    } else {
+        paginationHTML += `<span class="disabled">Próximo ›</span>`;
+    }
+    
+    paginationNav.innerHTML = paginationHTML;
+    
+    // Mostrar posts da página atual
+    showPage(currentPage);
+}
+
+function showPage(page) {
+    const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+    const start = (page - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+    
+    allPosts.forEach((post, index) => {
+        if (index >= start && index < end) {
+            post.style.display = 'flex';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+function changePage(page) {
+    currentPage = page;
+    updatePagination();
+    updatePaginationInfo();
+    
+    // Rolar para o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updatePaginationInfo() {
+    const start = (currentPage - 1) * POSTS_PER_PAGE + 1;
+    const end = Math.min(currentPage * POSTS_PER_PAGE, allPosts.length);
+    const paginationInfo = document.getElementById('paginationInfo');
+    
+    paginationInfo.textContent = `Mostrando ${start}-${end} de ${allPosts.length} posts`;
+}
+
+// Sistema de busca
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    let hasResults = false;
+    
+    allPosts.forEach(post => {
+        const title = post.getAttribute('data-title');
+        const category = post.getAttribute('data-category');
+        
+        if (title.includes(searchTerm) || category.includes(searchTerm)) {
+            post.style.display = 'flex';
+            hasResults = true;
+        } else {
+            post.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('noResults').style.display = hasResults ? 'none' : 'block';
+    
+    // Ocultar paginação durante busca
+    document.getElementById('pagination').style.display = searchTerm ? 'none' : 'flex';
+    document.getElementById('paginationInfo').style.display = searchTerm ? 'none' : 'block';
+    
+    // Reset para página 1 quando pesquisando
+    if (searchTerm) {
+        currentPage = 1;
+    }
+});
+</script>

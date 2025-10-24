@@ -55,9 +55,9 @@ permalink: /blog/
 
         {% if post.tags %}
           {% assign TAGS_PATH = '/blog/tags/' %}
-          <p class="tags">
+          <p class="tags-chips">
             {% for tag in post.tags %}
-              <a class="tag" href="{{ TAGS_PATH | relative_url }}#{{ tag | slugify: 'latin' }}">#{{ tag }}</a>
+              <a class="chip" href="{{ TAGS_PATH | relative_url }}#{{ tag | slugify: 'latin' }}">{{ tag }}</a>
             {% endfor %}
           </p>
         {% endif %}

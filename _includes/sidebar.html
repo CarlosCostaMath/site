@@ -1,0 +1,85 @@
+<div id="sidebar">
+    <div class="inner">
+        <section id="search" class="alt">
+            <form method="get" action="{{ '/busca/' | relative_url }}">
+                <input type="text" name="q" id="query" placeholder="Buscar no site..." />
+            </form>
+        </section>
+
+        <nav id="menu">
+            <header class="major">
+                <h2>Menu</h2>
+            </header>
+            <ul>
+                <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                <li>
+                    <span class="opener">Blog</span>
+                    <ul>
+                        <li><a href="{{ '/blog/' | relative_url }}">Todos os Posts</a></li>
+                        <li><a href="{{ '/blog/arquivo/' | relative_url }}">Arquivo</a></li>
+                        <li><a href="{{ '/blog/categorias/' | relative_url }}">Categorias</a></li>
+                        <li><a href="{{ '/blog/tags/' | relative_url }}">Tags</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="opener">Projetos</span>
+                    <ul>
+                        <li><a href="{{ '/projetos/' | relative_url }}">Todos os Projetos</a></li>
+                        <li><a href="{{ '/projetos/em-andamento/' | relative_url }}">Em Andamento</a></li>
+                        <li><a href="{{ '/projetos/concluidos/' | relative_url }}">Concluídos</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ '/sobre/' | relative_url }}">Sobre</a></li>
+                <li><a href="{{ '/contato/' | relative_url }}">Contato</a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <header class="major">
+                <h2>Math News</h2>
+            </header>
+				<div class="mini-posts">
+					{% assign items = site.data.news.items | sort: "date" | reverse %}
+					{% for item in items limit:3 %}
+					<article>
+					{% if item.image %}
+					<a href="{{ item.url | escape }}" class="image" target="_blank" rel="noopener noreferrer">
+					<img src="{{ item.image | escape }}" alt="{{ item.description | escape }}">
+					</a>
+					{% endif %}
+									
+					<!-- Descrição SEM link -->
+					<p>{{ item.description }}</p>
+									
+					<!-- (Opcional) um link discreto separado -->
+					<!-- <p style="margin-top:.25rem"><a href="{{ item.url | escape }}" target="_blank" rel="noopener noreferrer">→ abrir matéria</a></p> -->
+					</article>
+					{% endfor %}
+				</div>
+            <ul class="actions">
+                <li><a href="https://www.quantamagazine.org/" class="button" target="_blank" rel="noopener">Ver Mais Notícias</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <header class="major">
+                <h2>Contato</h2>
+            </header>
+            <p>{{ site.description }}</p>
+            <ul class="contact">
+                <li class="icon solid fa-envelope"><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+                {% if site.phone %}
+                <li class="icon solid fa-phone">{{ site.phone }}</li>
+                {% endif %}
+                {% if site.address %}
+                <li class="icon solid fa-home">{{ site.address }}</li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <footer id="footer">
+            <p class="copyright">&copy; {{ site.title }}. Todos os direitos reservados.<br>
+            Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a>.</p>
+        </footer>
+    </div>
+</div>

@@ -29,8 +29,10 @@ permalink: /blog/
   <div class="posts">
     {% for post in site.posts %}
     <article>
-      <a href="{{ post.url | relative_url }}" class="image image--post-thumbnail">
-        <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+      <a href="{{ post.url | relative_url }}" class="image"
+         style="display:grid; place-items:center; height:220px; overflow:hidden; border-radius:.75rem; background:#f6f6f6;">
+        <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy"
+             style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; object-position:center; display:block;">
       </a>
 
       <h3 class="post-title">
@@ -53,10 +55,17 @@ permalink: /blog/
 
         {% if post.tags %}
           {% assign TAGS_PATH = '/blog/tags/' %}
-          <p class="post-tags">
+          <p style="display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 0;">
             {% assign sorted = post.tags | sort_natural %}
             {% for tag in sorted %}
-              <a href="{{ TAGS_PATH | relative_url }}#{{ tag | slugify: 'latin' }}" class="post-tag">
+              <a href="{{ TAGS_PATH | relative_url }}#{{ tag | slugify: 'latin' }}"
+                 style="
+                   display:inline-block; padding:.28rem .6rem; border-radius:999px;
+                   background:#f8f9fa; color:#2c3e50; font-size:.85rem; text-decoration:none;
+                   /* Borda SIM: */
+                   border:1px solid #e9ecef;
+                   /* Se NÃO quiser borda, troque a linha acima por: border:0; */
+                 ">
                 {{ tag }}
               </a>
             {% endfor %}

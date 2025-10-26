@@ -28,10 +28,8 @@ title: Início
     <div class="posts">
         {% for post in site.posts limit:2 %}
         <article>
-                <a href="{{ post.url | relative_url }}" class="image"
-                   style="display:grid; place-items:center; height:220px; overflow:hidden; border-radius:.75rem; background:#f6f6f6;">
-                  <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy"
-                       style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; object-position:center; display:block;">
+                <a href="{{ post.url | relative_url }}" class="image image--post-thumbnail">
+                  <img src="{{ post.hero_image | relative_url }}" alt="{{ post.title }}" loading="lazy">
                 </a>
               <h3 class="post-title">
                 <a href="{{ post.url | relative_url }}">{{ post.title }}</a>

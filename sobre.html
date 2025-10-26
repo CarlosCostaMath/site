@@ -4,6 +4,163 @@ title: Sobre
 permalink: /sobre/
 ---
 
+<style>
+.sobre-hero {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sobre-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.sobre-hero p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.profile-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start;
+}
+
+.profile-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.profile-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.profile-info h2 {
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.skills-section {
+    background: #f5f7fa;
+    padding: 3rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border-left: 4px solid #667eea;
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.timeline-section {
+    margin: 4rem 0;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+    border-left: 3px solid #667eea;
+}
+
+.timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3.5rem;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #667eea;
+    border: 4px solid white;
+    box-shadow: 0 0 0 3px #667eea;
+}
+
+.timeline-date {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-item h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+@media (max-width: 768px) {
+    .profile-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .sobre-hero h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+
 <div class="sobre-hero">
     <h1>👋 Olá, eu sou Carlos Costa</h1>
     <p>Desenvolvedor, escritor e entusiasta de tecnologia compartilhando conhecimento através do blog</p>
@@ -20,7 +177,7 @@ permalink: /sobre/
         
         <p>Acredito no poder da educação e do compartilhamento de conhecimento para transformar vidas. Cada artigo aqui publicado é pensado para ser acessível, informativo e inspirador.</p>
         
-        <h3 class="subheading-accent">Áreas de Interesse</h3>
+        <h3 style="margin-top: 2rem; color: #667eea;">Áreas de Interesse</h3>
         <ul>
             <li>Desenvolvimento Web e Mobile</li>
             <li>Inteligência Artificial e Machine Learning</li>
@@ -44,7 +201,7 @@ permalink: /sobre/
 </section>
 
 <section class="skills-section">
-    <h2 class="section-title-center section-title-accent section-title-spacing-sm">Habilidades e Competências</h2>
+    <h2 style="text-align: center; color: #667eea; margin-bottom: 1rem;">Habilidades e Competências</h2>
     <div class="skills-grid">
         <div class="skill-item">
             <div class="skill-icon">💻</div>
@@ -74,7 +231,7 @@ permalink: /sobre/
 </section>
 
 <section class="timeline-section">
-    <h2 class="section-title-center section-title-accent section-title-spacing-lg">Minha Trajetória</h2>
+    <h2 style="text-align: center; color: #667eea; margin-bottom: 3rem;">Minha Trajetória</h2>
     <div class="timeline">
         <div class="timeline-item">
             <span class="timeline-date">2020 - Presente</span>
@@ -102,8 +259,8 @@ permalink: /sobre/
     </div>
 </section>
 
-<section class="section-cta">
-    <h2 class="section-cta__title">Vamos Conversar?</h2>
-    <p class="section-cta__description">Tem alguma dúvida, sugestão ou quer colaborar em algum projeto?</p>
+<section style="text-align: center; background: #f5f7fa; padding: 3rem; border-radius: 12px;">
+    <h2 style="color: #667eea; margin-bottom: 1rem;">Vamos Conversar?</h2>
+    <p style="margin-bottom: 2rem;">Tem alguma dúvida, sugestão ou quer colaborar em algum projeto?</p>
     <a href="{{ '/contato/' | relative_url }}" class="button primary large">Entre em Contato</a>
 </section>

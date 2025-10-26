@@ -6,189 +6,6 @@ breadcrumb_parent: /blog/
 breadcrumb_parent_name: Blog
 ---
 
-<style>
-.page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 3rem 2rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.page-header h1 {
-    margin: 0 0 0.5rem 0;
-    font-size: 2.5rem;
-    color: white;
-}
-
-.page-header p {
-    margin: 0;
-    opacity: 0.9;
-    font-size: 1.1rem;
-}
-
-.nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
-.tags-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem;
-    margin: 2rem 0;
-    padding: 2rem;
-    background: #f5f7fa;
-    border-radius: 12px;
-}
-
-.tag-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: white;
-    border: 2px solid #e1e8ed;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.tag-item:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border-color: #667eea;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.tag-badge {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.tag-item:hover .tag-badge {
-    background: white;
-    color: #667eea;
-}
-
-/* Tamanhos dinâmicos baseados na quantidade */
-.tag-size-1 { font-size: 0.8rem; }
-.tag-size-2 { font-size: 0.9rem; }
-.tag-size-3 { font-size: 1rem; }
-.tag-size-4 { font-size: 1.1rem; }
-.tag-size-5 { font-size: 1.2rem; font-weight: 700; }
-
-.tag-section {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: #f5f7fa;
-    border-radius: 8px;
-}
-
-.tag-section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid #667eea;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.tag-section-header h2 {
-    margin: 0;
-    font-size: 1.8rem;
-    color: #667eea;
-}
-
-.tag-count-badge {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    padding: 0.5rem 1.2rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.posts-list-compact {
-    display: grid;
-    gap: 0.8rem;
-}
-
-.post-item-compact {
-    background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 6px;
-    border-left: 4px solid #667eea;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.post-item-compact:hover {
-    transform: translateX(5px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.post-link {
-    font-weight: 600;
-    color: #2c3e50;
-    text-decoration: none;
-    flex: 1;
-}
-
-.post-link:hover {
-    color: #667eea;
-}
-
-.post-date-badge {
-    background: #667eea;
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-left: 1rem;
-    white-space: nowrap;
-}
-
-.post-category-badge {
-    background: #764ba2;
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    margin-left: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .post-item-compact {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .post-date-badge,
-    .post-category-badge {
-        margin-left: 0;
-    }
-}
-</style>
-
 {% include breadcrumb.html %}
 
 <section class="page-header">
@@ -208,7 +25,7 @@ breadcrumb_parent_name: Blog
 
 <!-- Nuvem de Tags -->
 <section>
-  <h2 style="text-align:center; margin-bottom:1.5rem;">Nuvem de Tags</h2>
+  <h2 class="section-title-center section-title-spacing-md">Nuvem de Tags</h2>
   {% assign tags_sorted = site.tags | sort %}
   {% assign max_count = 0 %}
   {% for t in tags_sorted %}
@@ -260,7 +77,7 @@ breadcrumb_parent_name: Blog
       {% for p in t[1] %}
         <div class="post-item-compact">
           <a href="{{ p.url | relative_url }}" class="post-link">{{ p.title }}</a>
-          <div style="display:flex; align-items:center; flex-wrap:wrap; gap:.5rem;">
+          <div class="post-meta-inline">
             <span class="post-date-badge">{{ p.date | date: "%d/%m/%Y" }}</span>
             {% if p.categories %}
               <span class="post-category-badge">{{ p.categories | join: ', ' }}</span>
@@ -270,12 +87,12 @@ breadcrumb_parent_name: Blog
       {% endfor %}
     </div>
 
-    <div style="text-align:center; margin-top:1.5rem;">
+    <div class="centered-action-group">
       <a href="#top" class="button small">↑ Voltar ao Topo</a>
     </div>
   </section>
 {% endfor %}
 
-<section style="margin-top:3rem; text-align:center;">
+<section class="section-centered-spaced">
   <a href="{{ '/blog/' | relative_url }}" class="button primary large">← Voltar ao Blog</a>
 </section>
